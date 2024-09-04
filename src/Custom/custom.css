@@ -1,6 +1,10 @@
+* {
+  font-family: "inter", system-ui;
+  color: #2b2d40;
+}
 .spacebox {
   /* From https://css.glass */
-  background: rgba(43, 45, 64, 0.7);
+  background: rgba(1, 1, 1, 0.65);
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(6.4px);
   -webkit-backdrop-filter: blur(6.4px);
@@ -16,4 +20,23 @@
   background-repeat: no-repeat;
   background-position: center;
   background-size: contain;
+}
+.hero {
+  background-image: url(./sitesrc/speaker_Png_graphic-removebg-preview.png),
+    url(./sitesrc/Computer_Icons_YouTube_Play_Button_PNG_-_Free_Download-removebg-preview.png),
+    url(./sitesrc/Keep_it_Shorts_and_Sweets-removebg-preview.png);
+  background-repeat: no-repeat;
+  background-position: left 10rem top 1rem, right 5rem top 9rem,
+    left 20rem bottom 7rem;
+  background-size: 5rem, 3rem;
+}
+.hero-txt h1 {
+  background-image: linear-gradient(45deg, #2b2d40, #4b0082, #ff0000);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  line-height: 5.7rem;
+  letter-spacing: 1px;
+  word-spacing: 1px;
+  margin-bottom: 10px;
 }

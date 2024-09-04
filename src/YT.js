@@ -1,14 +1,16 @@
-import React from 'react';
-import './Custom/output.css'
-import './Custom/custom.css'
-import Home from './Home/Feed';
+import React from "react";
+import "./Custom/output.css";
+import "./Custom/custom.css";
+import Feed from "./Home/Feed";
 
 const YT = () => {
   return (
     <>
-      <Home />
+      <main className="main bg-[#f8f8f8]">
+        <Feed />
+      </main>
     </>
-  )
-}
+  );
+};
 
-export default YT
+export default YT;
