@@ -40,3 +40,9 @@
   word-spacing: 1px;
   margin-bottom: 10px;
 }
+
+@media (max-width: 767px) {
+  .hero-txt h1 {
+    line-height: 3.8rem;
+  }
+}

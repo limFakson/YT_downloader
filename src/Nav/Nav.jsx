@@ -7,14 +7,14 @@ export default class Nav extends Component {
   render() {
     return (
       <div>
-        <div className="menu px-10 py-8 flex justify-between items-center">
+        <div className="menu pr-8 pl-10 sm:px-10 py-8 flex justify-between items-center">
           <div className="logo flex gap-2 items-center justify-center">
             <div className="img w-10 h-10">
               <img src={SiteLogo} alt="site logo" />
             </div>
             <h3 className="text-white font-semibold text-2xl">YT Downloader</h3>
           </div>
-          <div className="nav-list">
+          <div className="nav-list sm:block hidden">
             <ul className=" font-normal text-lg">
               <li className="text-white cursor-pointer inline-block mx-4">
                 Home
@@ -30,7 +30,7 @@ export default class Nav extends Component {
               </li>
             </ul>
           </div>
-          <Button button={"learn More"} />
+          <Button className={"hidden sm:block"} button={"learn More"} />
         </div>
       </div>
     );

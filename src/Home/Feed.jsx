@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Nav from "../Nav/Nav";
 import Button from "../Button/Button";
-import YTMockup from "../Custom/sitesrc/YouTube_App_-_UI_Redesign_Concept-removebg-preview.png";
+import YTMockup from "../Custom/sitesrc/YouTube_redesign-removebg-preview.png";
 
 export default class Feed extends Component {
   render() {
@@ -13,8 +13,8 @@ export default class Feed extends Component {
           <div className="grid">
             <div className="hero pt-7 flex flex-col items-center">
               <div className="search-space flex flex-col items-center w-full h-[35rem] px-10 relative">
-                <div className="hero-txt text-center w-[55rem] pb-4">
-                  <h1 className="text-[5rem] font-extrabold">
+                <div className="hero-txt text-center w-[80%] sm:w-[55rem] pb-4">
+                  <h1 className="text-6xl md:text-[5rem] font-extrabold">
                     Download Youtube videos by link!
                   </h1>
                   <span className="flex justify-center items-center gap-[5rem]">
@@ -52,7 +52,7 @@ export default class Feed extends Component {
               <img
                 src={YTMockup}
                 alt="YT mockup"
-                className="justify-self-center top-[-9rem] absolute w-[50rem]"
+                className="justify-self-center top-[-12rem] absolute w-[60rem]"
               />
             </div>
           </div>
