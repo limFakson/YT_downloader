@@ -15,6 +15,9 @@
   height: 100%;
   z-index: 0;
 }
+.menu:hover {
+  border-bottom: #f8f8f8 0.6px solid;
+}
 .bgImg {
   background-image: url(./sitesrc/youtube-img.jpeg);
   background-repeat: no-repeat;
@@ -26,8 +29,8 @@
     url(./sitesrc/Computer_Icons_YouTube_Play_Button_PNG_-_Free_Download-removebg-preview.png),
     url(./sitesrc/Keep_it_Shorts_and_Sweets-removebg-preview.png);
   background-repeat: no-repeat;
-  background-position: left 10rem top 1rem, right 5rem top 9rem,
-    left 20rem bottom 7rem;
+  background-position: left 10rem top 1rem, right 3rem top 9rem,
+    left 15rem bottom 9rem;
   background-size: 5rem, 3rem;
 }
 .hero-txt h1 {
@@ -41,8 +44,27 @@
   margin-bottom: 10px;
 }
 
-@media (max-width: 767px) {
+@media (max-width: 1219px) {
   .hero-txt h1 {
     line-height: 3.8rem;
   }
+  .hero {
+    background-position: left 2rem top 1rem, right 1rem top 10rem,
+      left 3rem bottom 9rem;
+    background-size: 5rem, 3rem;
+  }
+}
+@media (max-width: 640px) {
+  .hero {
+    background-position: left 1rem top -1rem, right -1rem top 13rem,
+      left 4rem bottom 7rem;
+    background-size: 5rem, 3rem;
+  }
+}
+
+.features-box:hover {
+  background-image: url(../Custom/sitesrc/download.svg);
+  background-repeat: no-repeat;
+  background-position: bottom right;
+  box-shadow: 0 4px 7.9px #0c101233, 0 20px 37.6px #0c10121a;
 }

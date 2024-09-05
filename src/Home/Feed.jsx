@@ -6,58 +6,60 @@ import YTMockup from "../Custom/sitesrc/YouTube_redesign-removebg-preview.png";
 export default class Feed extends Component {
   render() {
     return (
-      <section className="bg-[#2B2D40] bgImg w-full h-[45rem] relative">
-        <div className="spacebox"></div>
-        <div className="top z-10 grid relative w-full">
-          <Nav />
-          <div className="grid">
-            <div className="hero pt-7 flex flex-col items-center">
-              <div className="search-space flex flex-col items-center w-full h-[35rem] px-10 relative">
-                <div className="hero-txt text-center w-[80%] sm:w-[55rem] pb-4">
-                  <h1 className="text-6xl md:text-[5rem] font-extrabold">
-                    Download Youtube videos by link!
-                  </h1>
-                  <span className="flex justify-center items-center gap-[5rem]">
-                    <div className="">
-                      <i
-                        className="fa-solid fa-circle-check inline-block"
-                        style={{ color: "#ffffff" }}
-                      />
-                      <p className="text-white inline-block pl-1.5">
-                        Unlimited Downloads
-                      </p>
-                    </div>
-                    <div>
-                      <i
-                        className="fa-solid fa-circle-check inline-block"
-                        style={{ color: "#ffffff" }}
-                      />
-                      <p className="text-white inline-block pl-1.5">
-                        Easy to use
-                      </p>
-                    </div>
-                  </span>
-                </div>
-                <div className="search flex justify-center items-center pl-2 pr-4 rounded-2xl border border-[#2B2D40] bg-[#000] h-[5rem] w-full">
-                  <input
-                    type="text"
-                    placeholder="paste your url"
-                    className="border-none outline-none text-[#f8f8f8] bg-transparent w-full h-full pl-4"
-                  />
-                  <Button button={"Download"} />
+      <div className="external h-[57rem] lg:h-[64rem]">
+        <section className="bg-[#2B2D40] bgImg w-full h-[45rem] relative">
+          <div className="spacebox"></div>
+          <div className="top z-10 grid relative w-full">
+            <Nav />
+            <div className="grid">
+              <div className="hero pt-7 flex flex-col items-center">
+                <div className="search-space flex flex-col items-center w-full h-[35rem] px-5 sm:px-10 relative">
+                  <div className="hero-txt text-center w-[90%] md:w-[55rem] pb-4">
+                    <h1 className="text-6xl md:text-[5rem] font-extrabold">
+                      Download Youtube videos by link!
+                    </h1>
+                    <span className="flex justify-center items-center gap-10 sm:gap-[5rem]">
+                      <div className="">
+                        <i
+                          className="fa-solid fa-circle-check inline-block"
+                          style={{ color: "#ffffff" }}
+                        />
+                        <p className="text-white inline-block pl-1 sm:pl-1.5">
+                          Unlimited Downloads
+                        </p>
+                      </div>
+                      <div>
+                        <i
+                          className="fa-solid fa-circle-check inline-block"
+                          style={{ color: "#ffffff" }}
+                        />
+                        <p className="text-white inline-block pl-1 sm:pl-1.5">
+                          Easy to use
+                        </p>
+                      </div>
+                    </span>
+                  </div>
+                  <div className="search flex justify-center items-center pl-2 pr-2 sm:pr-4 rounded-2xl border border-[#2B2D40] bg-[#000] h-[5rem] w-full">
+                    <input
+                      type="text"
+                      placeholder="paste your url"
+                      className="border-none outline-none text-[#f8f8f8] bg-transparent w-full h-full pl-4"
+                    />
+                    <Button content={"Download"} className={"text-sm"} />
+                  </div>
                 </div>
               </div>
-            </div>
-            <div className="YT-mockup self-center grid w-full h-full justify-self-center relative">
-              <img
-                src={YTMockup}
-                alt="YT mockup"
-                className="justify-self-center top-[-12rem] absolute w-[60rem]"
-              />
+              <div className="YT-mockup self-center grid w-full h-full justify-self-center relative">
+                <img
+                  src={YTMockup}
+                  alt="YT mockup"
+                  className="justify-self-center top-[-5rem] sm:top-[-14rem] absolute lg:w-[60rem] sm:w-[50rem]"
+                />
+              </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
+      </div>
     );
   }
 }
