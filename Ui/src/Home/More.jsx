@@ -4,7 +4,7 @@ import Button from "../Button/Button";
 
 const More = () => {
   return (
-    <section className="my-8">
+    <section id="#fea-sec" className="my-8">
       <div className="secton-features pt-14">
         <div className="section-body flex sm:flex-row flex-wrap px-2 sm:px-1 lg:px-12 flex-col items-center justify-center">
           <Features

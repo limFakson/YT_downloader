@@ -68,3 +68,25 @@
   background-position: bottom right;
   box-shadow: 0 4px 7.9px #0c101233, 0 20px 37.6px #0c10121a;
 }
+
+.nav-list-item:hover {
+  background-color: #2b2d40;
+  border-radius: 3px;
+}
+.nav-box {
+  background-image: linear-gradient(45deg, #2b2d40, #4b0082, #ff0000);
+  transition: 0.3s ease-in-out;
+  transition-behavior: allow-discrete;
+  transition-delay: 0.3s;
+}
+.nav-box.closed {
+  display: none;
+  transform: translateY(-80px);
+}
+.nav-box.open {
+  display: block;
+  transform: translateY(0px);
+}
+.nav-box-list:hover {
+  background-color: #2b2d40;
+}
