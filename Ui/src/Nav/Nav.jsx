@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Button from "../Button/Button";
 import NavBox from "./NavBox";
 import NavSlide from "../app/Modal/SlideNav";
@@ -6,16 +6,37 @@ import NavSlide from "../app/Modal/SlideNav";
 import SiteLogo from "../Custom/sitesrc/Asset_4figma2.png";
 
 const Nav = () => {
+  // declaration
   const [isOpen, setIsOpen] = useState(false);
   const [isSlide, setIsSlide] = useState(false);
+  const clsBtn = useRef(null);
 
+  // set clsBtn to display none & add class ls to queryselector
+  useEffect(() => {
+    if (isSlide == false) {
+      clsBtn.current.style.display = "none";
+    }
+
+    if (isSlide && document.querySelector(".nav-slide")) {
+      document.querySelector(".nav-slide").classList.add("open");
+    } else if (document.querySelector(".nav-slide")) {
+      document.querySelector(".nav-slide").classList.remove("open");
+    }
+  }, [isSlide]);
+
+  // sub menu dropdown func
   function handleNavBox() {
     setIsOpen(!isOpen);
   }
 
+  // handle functions of slider bar
   function handleNavSlide() {
     setIsSlide(!isSlide);
+    clsBtn.current.style.display = "block";
   }
+  const closeNavSlide = () => {
+    setIsSlide(!isSlide);
+  };
 
   return (
     <div>
@@ -28,6 +49,13 @@ const Nav = () => {
             ></i>
           </span>
           <span className="block border-[#f8f8f8] border-r-2 h-6"></span>
+        </div>
+        <div
+          ref={clsBtn}
+          onClick={closeNavSlide}
+          className="absolute z-20 left-6 cursor-pointer top-10 p-[0.13rem] text-center w-10 h-10 border border-[#f8f8f8] rounded close-slide"
+        >
+          <i class="fa-solid fa-xmark text-[#f8f8f8] text-2xl"></i>
         </div>
         <div className="logo flex gap-2 items-center justify-center">
           <div className="img w-10 h-10">
@@ -61,8 +89,12 @@ const Nav = () => {
         </div>
         <Button className={"hidden md:block"} content={"learn More"} />
       </div>
-      <NavBox className={`${isOpen ? "open" : "closed"}`} />
-      {isSlide && <NavSlide />}
+      <NavBox
+        className={`${
+          isOpen ? "open" : "closed"
+        } top-[5rem] right-[34.7rem] nav-box`}
+      />
+      {isSlide && <NavSlide className={"nav-slide"} />}
     </div>
   );
 };

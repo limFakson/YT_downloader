@@ -90,3 +90,31 @@
 .nav-box-list:hover {
   background-color: #2b2d40;
 }
+.slide-item li:hover {
+  background-color: #000;
+  border-radius: 0;
+}
+.close-slide,
+.slide-item li,
+.nav-list-item {
+  transition: ease-in 0.2s;
+}
+.close-slide:hover {
+  background-color: #000;
+}
+.nav-slide {
+  transition: transform 0.4s ease-in-out;
+  transform: translateX(-100%);
+}
+
+.sub-list-slide {
+  transition: transform 0.4s ease-in-out;
+  transform: translateY(-100%);
+}
+.sub-list-slide.open {
+  transform: translateY(0);
+}
+
+.nav-slide.open {
+  transform: translateX(0);
+}
