@@ -1,9 +1,14 @@
-import React, { Component } from "react";
+import React, { Component, useRef, useState } from "react";
 import Nav from "../Nav/Nav";
 import Button from "../Button/Button";
 import YTMockup from "../Custom/sitesrc/YouTube_redesign-removebg-preview.png";
 
 const Feed = () => {
+  const [ytLinkVal, setYtLinkVal] = useState("");
+  const ytLink = useRef(null);
+  function handleBtnClick() {
+    console.log(ytLinkVal);
+  }
   return (
     <div className="external h-[57rem] lg:h-[64rem]">
       <section className="bg-[#2B2D40] bgImg w-full h-[45rem] relative">
@@ -40,11 +45,18 @@ const Feed = () => {
                 </div>
                 <div className="search flex justify-center items-center pl-2 pr-2 sm:pr-4 rounded-2xl border border-[#2B2D40] bg-[#000] h-[5rem] w-full">
                   <input
+                    ref={ytLink}
+                    value={ytLinkVal}
+                    onChange={(e) => setYtLinkVal(e.target.value)}
                     type="text"
                     placeholder="paste your url"
                     className="border-none outline-none text-[#f8f8f8] bg-transparent w-full h-full pl-4"
                   />
-                  <Button content={"Download"} className={"text-sm"} />
+                  <Button
+                    compClick={handleBtnClick}
+                    content={"Download"}
+                    className={"text-sm"}
+                  />
                 </div>
               </div>
             </div>

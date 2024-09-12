@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from "react";
 import Button from "../../Button/Button";
 import SubNav from "../../Nav/NavBox";
 
-const SlideNav = ({ className }) => {
+const SlideNav = React.forwardRef((props, ref) => {
   const [dropList, setDropList] = useState(false);
   const subList = useRef(null);
 
@@ -25,10 +25,13 @@ const SlideNav = ({ className }) => {
 
   return (
     <div
-      className={`nav-slide sm:hidden w-full bg-[rgba(0,0,0,0.8)] fixed left-0 h-svh overscroll-contain top-0 z-10 ${className}`}
+      className={`nav-slide sm:hidden w-full bg-[rgba(0,0,0,0.8)] fixed left-0 h-svh overscroll-contain top-0 z-10 ${props.className}`}
     >
-      <div className="pt-24 pb-16 flex flex-col items-start justify-around bg-[#2B2D40] h-svh w-[85%] fixed z-10">
-        <ul className="pb-6 slide-item font-normal w-full flex flex-col h-auto text-lg">
+      <div className="pt-8 pb-16 flex flex-col items-start justify-around bg-[#2B2D40] h-svh w-[85%] fixed z-10">
+        <ul
+          ref={ref}
+          className="pb-6 slide-item font-normal w-full flex flex-col h-auto text-lg"
+        >
           <a href="/" className=" mb-4 border-b border-[#f8f8f8]">
             <li className="text-white nav-list-item cursor-pointer py-6 pl-8 block p-2">
               Home
@@ -60,6 +63,6 @@ const SlideNav = ({ className }) => {
       </div>
     </div>
   );
-};
+});
 
 export default SlideNav;

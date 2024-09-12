@@ -102,7 +102,8 @@
 .close-slide:hover {
   background-color: #000;
 }
-.nav-slide {
+.nav-slide,
+.close-slide {
   transition: transform 0.4s ease-in-out;
   transform: translateX(-100%);
 }
@@ -115,6 +116,13 @@
   transform: translateY(0);
 }
 
-.nav-slide.open {
+.nav-slide.open,
+.clsbtn {
   transform: translateX(0);
+}
+.features_sec {
+  background-image: url(../Custom/sitesrc/Circle_Patterns-removebg-preview.png);
+  background-repeat: space;
+  background-position: bottom;
+  background-size: 30rem;
 }

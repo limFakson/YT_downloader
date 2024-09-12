@@ -8,7 +8,7 @@ import Footer from "./Home/Footer";
 const YT = () => {
   return (
     <>
-      <main className="main bg-[#f8f8f8]">
+      <main className="main backdrop-blur-xl bg-[#f8f8f8]">
         <Feed />
         <Feature />
         <Footer />

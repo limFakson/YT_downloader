@@ -10,11 +10,13 @@ const Nav = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isSlide, setIsSlide] = useState(false);
   const clsBtn = useRef(null);
+  const slideItem = React.createRef(null);
 
   // set clsBtn to display none & add class ls to queryselector
   useEffect(() => {
     if (isSlide == false) {
       clsBtn.current.style.display = "none";
+      clsBtn.current.classList.remove("clsbtn");
     }
 
     if (isSlide && document.querySelector(".nav-slide")) {
@@ -23,6 +25,33 @@ const Nav = () => {
       document.querySelector(".nav-slide").classList.remove("open");
     }
   }, [isSlide]);
+
+  // onload setting if slideitem is changed
+  useEffect(() => {
+    if (isSlide === true) {
+      const slideItems = slideItem.current.children;
+
+      // Loop through each slide item
+      Array.prototype.forEach.call(slideItems, (item) => {
+        if (item.textContent.trim() !== "Other") {
+          item.addEventListener("click", () => {
+            setIsSlide(!isSlide);
+          });
+        }
+      });
+
+      // Clean up event listeners when component unmounts or effect is re-triggered
+      return () => {
+        Array.prototype.forEach.call(slideItems, (item) => {
+          if (item.textContent.trim() !== "Other") {
+            item.removeEventListener("click", () => {
+              setIsSlide(!isSlide);
+            });
+          }
+        });
+      };
+    }
+  }, [isSlide, slideItem]);
 
   // sub menu dropdown func
   function handleNavBox() {
@@ -33,6 +62,7 @@ const Nav = () => {
   function handleNavSlide() {
     setIsSlide(!isSlide);
     clsBtn.current.style.display = "block";
+    clsBtn.current.classList.add("clsbtn");
   }
   const closeNavSlide = () => {
     setIsSlide(!isSlide);
@@ -53,7 +83,7 @@ const Nav = () => {
         <div
           ref={clsBtn}
           onClick={closeNavSlide}
-          className="absolute z-20 left-6 cursor-pointer top-10 p-[0.13rem] text-center w-10 h-10 border border-[#f8f8f8] rounded close-slide"
+          className="fixed z-20 left-6 cursor-pointer top-10 p-[0.13rem] text-center w-10 h-10 border border-[#f8f8f8] rounded close-slide"
         >
           <i class="fa-solid fa-xmark text-[#f8f8f8] text-2xl"></i>
         </div>
@@ -94,7 +124,7 @@ const Nav = () => {
           isOpen ? "open" : "closed"
         } top-[5rem] right-[34.7rem] nav-box`}
       />
-      {isSlide && <NavSlide className={"nav-slide"} />}
+      {isSlide && <NavSlide ref={slideItem} className={"nav-slide"} />}
     </div>
   );
 };
