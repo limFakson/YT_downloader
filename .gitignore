@@ -4,4 +4,17 @@ venv/
 # Environmental variable
 .env
 
+# Cache
 __pycache__/
+
+# Media files
+*.webm*
+*.mp4
+*.txt
+*.csv
+
+# Databse file
+db.sqlite3
+
+# Unknown
+*.lnk
