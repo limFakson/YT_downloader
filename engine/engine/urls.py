@@ -2,4 +2,4 @@ from django.contrib import admin
 from django.urls import path
 from . import views
 
-urlpatterns = [path("ytlink", views.yt_link)]
+urlpatterns = [path("ytdlp", views.yt_link)]

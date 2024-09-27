@@ -23,7 +23,6 @@ class YTVideoCore:
 
     def yt_core_func(self):
         yt = YouTube(self.url, "WEB_CREATOR")
-        print(yt.title)
 
         if self.audio:
             link = self.yt_audio(yt)
@@ -36,61 +35,115 @@ class YTVideoCore:
         else:
             link = self.yt_vid(yt)
 
-        print(link)
+        return link
 
     # # Example video URL
 
     def yt_audio(self, yt) -> dict[str:str]:
         streams = yt.streams.filter(res=self.quality, only_audio=True)
-        stream_dict = {}
-        index = 0
+
+        stream_list = []
+
+        if streams is None:
+            return None
+
         for stream in streams:
             download_link = stream.url
-            stream_dict[index] = download_link
-            index += 1
+            stream_list.append(
+                {
+                    "filename": stream.default_filename,
+                    "resolution": f"{stream.width} X {stream.height}",
+                    "quality": stream.resolution,
+                    "filesize": stream.filesize_mb,
+                    "file extension": stream.subtype,
+                    "mime_type": stream.mime_type,
+                    "url": stream.url,
+                }
+            )
 
-        return stream_dict
+        return stream_list
 
     def highest_quality(self, yt) -> dict[str:str]:
         streams = yt.streams.get_highest_resolution()
-        stream_dict = {}
-        download_link = streams.url
-        stream_dict[0] = download_link
-        return stream_dict
+
+        if streams is None:
+            return None
+
+        stream_list = {
+            "filename": streams.default_filename,
+            "resolution": f"{streams.width} X {streams.height}",
+            "quality": streams.resolution,
+            "filesize": streams.filesize_mb,
+            "file extension": streams.subtype,
+            "mime_type": streams.mime_type,
+            "url": streams.url,
+        }
+
+        return stream_list
 
     def pick_quality(self, yt) -> dict[str:str]:
         streams = yt.streams.get_by_resolution(self.quality)
-        stream_dict = {}
-        index = 0
-        download_link = streams.url
-        stream_dict[index] = download_link
 
-        return stream_dict
+        if streams is None:
+            return None
+
+        stream_list = {
+            "filename": streams.default_filename,
+            "resolution": f"{streams.width} X {streams.height}",
+            "quality": streams.resolution,
+            "filesize": streams.filesize_mb,
+            "file extension": streams.subtype,
+            "mime_type": streams.mime_type,
+            "url": streams.url,
+        }
+
+        return stream_list
 
     def yt_vid(self, yt) -> dict[str:str]:
         streams = yt.streams.filter(
             res=self.quality, file_extension=self.file_type, only_video=True
         )
-        stream_dict = {}
-        index = 0
+        stream_list = []
+
+        if streams is None:
+            return None
+
         for stream in streams:
             download_link = stream.url
-            stream_dict[index] = download_link
-            index += 1
+            stream_list.append(
+                {
+                    "filename": stream.default_filename,
+                    "resolution": f"{stream.width} X {stream.height}",
+                    "quality": stream.resolution,
+                    "filesize": stream.filesize_mb,
+                    "mime_type": stream.mime_type,
+                    "file extension": stream.subtype,
+                    "url": stream.url,
+                }
+            )
 
-        return stream_dict
+        return stream_list
 
     def yt_all(self, yt) -> dict[str:str]:
         streams = yt.streams()
-        stream_dict = {}
-        index = 0
+
+        stream_list = []
+
+        if streams is None:
+            return None
+
         for stream in streams:
             download_link = stream.url
-            stream_dict[index] = download_link
-            index += 1
+            stream_list.append(
+                {
+                    "filename": stream.default_filename,
+                    "resolution": f"{stream.width} X {stream.height}",
+                    "quality": stream.resolution,
+                    "filesize": stream.filesize_mb,
+                    "file extension": stream.subtype,
+                    "mime_type": stream.mime_type,
+                    "url": stream.url,
+                }
+            )
 
-        return stream_dict
-
-
-ytV = YTVideoCore("https://youtu.be/lWAdaWqlsWE?si=0-33SJRS2-u-Q780", quality="360p")
-ytV.yt_core_func()
+        return stream_list

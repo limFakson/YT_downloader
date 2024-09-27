@@ -1,11 +1,18 @@
+import json
 from django.shortcuts import render
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from .processor.ytlink import link_processor
+from django.http import JsonResponse
+from .processor.ytlink import YTVideoCore
+from .processor.func import process
 
 
-@api_view(["POST"])
+@api_view(["GET"])
 def yt_link(request):
-    data = request.data
-    link_processor(data["link"])
-    return Response()
+    keyword = request.query_params["keyword"]
+    url = request.query_params["url"]
+
+    core = process(keyword, url=url)
+    details = core.yt_core_func()
+
+    return JsonResponse(details, safe=False)
