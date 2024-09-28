@@ -1,3 +1,4 @@
+from pytubefix.exceptions import RegexMatchError
 from urllib.request import urlopen
 from pytubefix import YouTube
 import json
@@ -22,20 +23,29 @@ class YTVideoCore:
         self.all = all_in
 
     def yt_core_func(self):
-        yt = YouTube(self.url, "WEB_CREATOR")
+        try:
+            yt = YouTube(self.url, "WEB_CREATOR")
 
-        if self.audio:
-            link = self.yt_audio(yt)
-        elif self.highest_res:
-            link = self.highest_quality(yt)
-        elif self.quality is not None:
-            link = self.pick_quality(yt)
-        elif self.all:
-            link = self.yt_all(yt)
-        else:
-            link = self.yt_vid(yt)
+            if self.audio:
+                link = self.yt_audio(yt)
+            elif self.highest_res:
+                link = self.highest_quality(yt)
+            elif self.quality is not None:
+                link = self.pick_quality(yt)
+            elif self.all:
+                link = self.yt_all(yt)
+            else:
+                link = self.yt_vid(yt)
 
-        return link
+            return link
+        except RegexMatchError:
+            err_msg = {"error": "Inputed url is invalid"}
+
+            return err_msg
+        except Exception as e:
+            err_msg = {"error": e}
+
+            return err_msg
 
     # # Example video URL
 
@@ -100,29 +110,34 @@ class YTVideoCore:
         return stream_list
 
     def yt_vid(self, yt) -> dict[str:str]:
-        streams = yt.streams.filter(
-            res=self.quality, file_extension=self.file_type, only_video=True
-        )
-        stream_list = []
-
-        if streams is None:
-            return None
-
-        for stream in streams:
-            download_link = stream.url
-            stream_list.append(
-                {
-                    "filename": stream.default_filename,
-                    "resolution": f"{stream.width} X {stream.height}",
-                    "quality": stream.resolution,
-                    "filesize": stream.filesize_mb,
-                    "mime_type": stream.mime_type,
-                    "file extension": stream.subtype,
-                    "url": stream.url,
-                }
+        try:
+            streams = yt.streams.filter(
+                res=self.quality, file_extension=self.file_type, only_video=True
             )
+            stream_list = []
 
-        return stream_list
+            if streams is None:
+                return None
+
+            for stream in streams:
+                download_link = stream.url
+                stream_list.append(
+                    {
+                        "filename": stream.default_filename,
+                        "resolution": f"{stream.width} X {stream.height}",
+                        "quality": stream.resolution,
+                        "filesize": stream.filesize_mb,
+                        "mime_type": stream.mime_type,
+                        "file extension": stream.subtype,
+                        "url": stream.url,
+                    }
+                )
+
+            return stream_list
+
+        except Exception as e:
+            err_msg = {"error": e}
+            return err_msg
 
     def yt_all(self, yt) -> dict[str:str]:
         streams = yt.streams()
