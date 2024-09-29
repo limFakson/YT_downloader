@@ -5,6 +5,7 @@ from .ytlink import YTVideoCore
 def process(
     keyword: str,
     url: str,
+    pros: bool,
     all_in: bool = False,
     quality_highest: bool = False,
     quality: str = None,
@@ -20,6 +21,7 @@ def process(
             quality=quality,
             file_type=file_type,
             audio=audio,
+            pros=pros,
         )
         return core
     elif keyword == "shorts":
