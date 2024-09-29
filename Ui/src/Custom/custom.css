@@ -127,3 +127,10 @@
   background-position: bottom;
   background-size: 30rem;
 }
+
+.body-no-scroll {
+  overflow: hidden;
+}
+.yt-details:hover {
+  background-color: #fffff4;
+}

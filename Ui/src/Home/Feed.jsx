@@ -1,9 +1,23 @@
-import React, { Component, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import Nav from "../Nav/Nav";
 import Button from "../Button/Button";
+import DownloadModal from "../app/Modal/Download";
 import YTMockup from "../Custom/sitesrc/YouTube_redesign-removebg-preview.png";
+import { useToast } from "@chakra-ui/react";
 
 const Feed = () => {
+  const toast = useToast();
+  const showToast = () => {
+    toast({
+      title: "Toast clicked.",
+      description: "We've created your account for you.",
+      status: "info",
+      duration: 4000,
+      position: "top",
+      isClosable: true,
+    });
+  };
+
   const [ytLinkVal, setYtLinkVal] = useState("");
   const ytLink = useRef(null);
   function handleBtnClick() {
@@ -58,6 +72,7 @@ const Feed = () => {
                     className={"text-sm"}
                   />
                 </div>
+                <DownloadModal />
               </div>
             </div>
             <div className="YT-mockup self-center grid w-full h-full justify-self-center relative">

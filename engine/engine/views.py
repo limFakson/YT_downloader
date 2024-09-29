@@ -19,7 +19,12 @@ def yt_link(request):
     qlty = request.query_params.get("qlty", None)
     ext = request.query_params.get("ext", "mp4")
     aud = request.query_params.get("aud", False)
-    pros = request.query_params.get("pros", False)
+    pros = request.query_params.get("pros")
+
+    if pros == "False":
+        pros = False
+    else:
+        pros = True
 
     core = process(
         keyword,

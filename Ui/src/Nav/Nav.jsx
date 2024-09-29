@@ -12,9 +12,9 @@ const Nav = () => {
   const clsBtn = useRef(null);
   const slideItem = React.createRef(null);
 
-  // set clsBtn to display none & add class ls to queryselector
+  // set clsBtn to display none & add/remove class ls to queryselector
   useEffect(() => {
-    if (isSlide == false) {
+    if (isSlide === false) {
       clsBtn.current.style.display = "none";
       clsBtn.current.classList.remove("clsbtn");
     }
@@ -23,6 +23,15 @@ const Nav = () => {
       document.querySelector(".nav-slide").classList.add("open");
     } else if (document.querySelector(".nav-slide")) {
       document.querySelector(".nav-slide").classList.remove("open");
+    }
+  }, [isSlide]);
+
+  // Handle body scrolling based on `isSlide`
+  useEffect(() => {
+    if (isSlide) {
+      document.body.classList.add("body-no-scroll");
+    } else {
+      document.body.classList.remove("body-no-scroll");
     }
   }, [isSlide]);
 
@@ -35,7 +44,7 @@ const Nav = () => {
       Array.prototype.forEach.call(slideItems, (item) => {
         if (item.textContent.trim() !== "Other") {
           item.addEventListener("click", () => {
-            setIsSlide(!isSlide);
+            setIsSlide(false); // Close the slide when clicking an item
           });
         }
       });
@@ -45,7 +54,7 @@ const Nav = () => {
         Array.prototype.forEach.call(slideItems, (item) => {
           if (item.textContent.trim() !== "Other") {
             item.removeEventListener("click", () => {
-              setIsSlide(!isSlide);
+              setIsSlide(false);
             });
           }
         });
@@ -65,7 +74,7 @@ const Nav = () => {
     clsBtn.current.classList.add("clsbtn");
   }
   const closeNavSlide = () => {
-    setIsSlide(!isSlide);
+    setIsSlide(false);
   };
 
   return (
@@ -74,7 +83,7 @@ const Nav = () => {
         <div className="menu-icon cursor-pointer flex gap-3 items-center sm:hidden pr-4">
           <span onClick={handleNavSlide}>
             <i
-              class="fa-solid fa-bars text-lg"
+              className="fa-solid fa-bars text-lg"
               style={{ color: "#ffffff" }}
             ></i>
           </span>
@@ -85,7 +94,7 @@ const Nav = () => {
           onClick={closeNavSlide}
           className="fixed z-20 left-6 cursor-pointer top-10 p-[0.13rem] text-center w-10 h-10 border border-[#f8f8f8] rounded close-slide"
         >
-          <i class="fa-solid fa-xmark text-[#f8f8f8] text-2xl"></i>
+          <i className="fa-solid fa-xmark text-[#f8f8f8] text-2xl"></i>
         </div>
         <div className="logo flex gap-2 items-center justify-center">
           <div className="img w-10 h-10">
@@ -110,7 +119,7 @@ const Nav = () => {
               className="text-white nav-list-item cursor-pointer inline-block mx-2 p-2"
             >
               Other
-              <i class="fa-solid fa-caret-down pl-3 text-sm text-[#f8f8f8]"></i>
+              <i className="fa-solid fa-caret-down pl-3 text-sm text-[#f8f8f8]"></i>
             </li>
             <li className="text-white nav-list-item cursor-pointer inline-block mx-2 p-2">
               Github
