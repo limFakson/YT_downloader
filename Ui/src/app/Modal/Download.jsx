@@ -1,29 +1,111 @@
-import { useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 import React from "react";
 import YoutubeThumbnail from "../../Custom/sitesrc/youtube_thumbenail_demo.jpeg";
 
-const Download = () => {
-  const isModalOpen = true;
+const Download = ({ data, onClose }) => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalContent, setModalContent] = useState("");
+  const heightRef = useRef(null);
+
+  const restrictHeight = () => {
+    if (heightRef.current) {
+      if (heightRef.current) {
+        const maxHeight = window.innerHeight * 0.87;
+        console.log(maxHeight, window.innerHeight);
+        if (heightRef.current.clientHeight > maxHeight) {
+          heightRef.current.style.height = `${maxHeight}px`;
+          heightRef.current.style.overflowY = "auto";
+        } else {
+          heightRef.current.style.height = "auto";
+          heightRef.current.style.overflowY = "auto";
+        }
+      }
+    }
+  };
+
+  useEffect(() => {
+    if (data) {
+      if (data.error != null) {
+        setIsModalOpen(false);
+      } else {
+        setIsModalOpen(true);
+        setModalContent(data);
+      }
+    }
+  }, [data]);
+
+  const closeDownloadModal = () => {
+    setIsModalOpen(false);
+    onClose();
+  };
+
   useEffect(() => {
     document.body.style.overflow = isModalOpen ? "hidden" : "auto";
   }, [isModalOpen]);
+
+  useEffect(() => {
+    if (isModalOpen) {
+      restrictHeight();
+    }
+
+    window.addEventListener("resize", restrictHeight);
+
+    return () => {
+      window.removeEventListener("resize", restrictHeight);
+    };
+  }, [isModalOpen]);
+
   return (
     <div className="dwn-modal fixed left-0 top-0 w-full h-full z-50 overflow-hidden">
       <div className="relative w-full pt-8 h-screen flex justify-center items-center bg-[#ffffff30]">
-        <div className="relative modal-details bg-[#2b2d40] w-[85%] rounded-lg p-8">
-          <span className="text-right">
-            <i className="fa-regular fa-circle-xmark text-red-500"></i>
+        <div
+          className="relative grid modal-details bg-[#2b2d40] h-[700px] w-[75%] max-sm:w-[80%] rounded-lg p-4"
+          ref={heightRef}
+        >
+          <span
+            className="text-right pr-2 cursor-pointer"
+            onClick={closeDownloadModal}
+          >
+            <i className="fa-regular fa-circle-xmark text-xl text-red-500"></i>
           </span>
-          <div className="yt-details pt-8 pl-6 flex justify-start items-center gap-2">
-            <img
-              src={YoutubeThumbnail}
-              className="w-full max-w-[150px] rounded"
-              alt=""
-            />
-            <span className="yt-filename text-white">
-              ✨Perfect World EP 180 [MULTI SUB]
-            </span>
-          </div>
+          {isModalOpen ? (
+            <div className="mt-4 overflow-y-scroll">
+              {modalContent.map((ytContent) => (
+                <div className="yt-details rounded-lg mt-3 p-4 flex max-md:flex-wrap justify-between items-center gap-2 pl-2 pr-6">
+                  <div className="yt-thumbnail flex items-center justify-start gap-2 md:w-[45%] min-[900px]:w-[45%] min-[1200px]:w-[50%]">
+                    <img
+                      src={ytContent.thumbnail}
+                      className="w-full max-w-[150px] rounded"
+                      alt=""
+                    />
+                    <span className="yt-filename max-sm:text-base text-white">
+                      {ytContent.filename.split(".")[0]}
+                    </span>
+                  </div>
+                  <div className="flex max-sm:flex-wrap max-md:w-full items-center justify-start">
+                    <div className="yt-features max-sm:mt-2 sm:pr-4 min-[900px]:pr-0 min-[1200px]:pr-4">
+                      <span className="fea-bullet text-[#f4f4f4] border-[#FF0000] border text-xs sm:text-sm p-2 sm:p-3 mx-2 cursor-default rounded-3xl font-light">
+                        {ytContent.mime_type}
+                      </span>
+                      <span className="fea-bullet text-[#f4f4f4] border-[#FF0000] border text-xs sm:text-sm p-2 sm:p-3 mx-2 cursor-default rounded-3xl font-light">
+                        {ytContent.file_ext + " " + ytContent.quality}
+                      </span>
+                      <span className="fea-bullet text-[#f4f4f4] border-[#FF0000] border text-xs sm:text-sm p-2 sm:p-3 mx-2 cursor-default rounded-3xl font-light">
+                        {ytContent.filesize + " " + "Mb"}
+                      </span>
+                    </div>
+                    <a href={ytContent.url}>
+                      <button className="w-24 h-10 max-sm:h-12 max-sm:w-full max-md:w-[8rem] max-sm:mt-4 dwn-btn bg-[#FF0000] rounded-md">
+                        <i class="fa-solid fa-download"></i>
+                      </button>
+                    </a>
+                  </div>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div className="mt-4 overflow-y-scroll"></div>
+          )}
         </div>
       </div>
     </div>

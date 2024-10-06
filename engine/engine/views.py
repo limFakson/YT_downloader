@@ -9,7 +9,13 @@ from .processor.func import process
 
 
 @api_view(["GET"])
+def test_view(request):
+    return Response({"message": "Connection is open"}, 200)
+
+
+@api_view(["GET"])
 def yt_link(request):
+    print(request.query_params["keyword"])
     keyword = request.query_params["keyword"]
     url = request.query_params["url"]
 

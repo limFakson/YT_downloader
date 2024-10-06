@@ -1,6 +1,6 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
+import React from "react";
+import ReactDOM from "react-dom";
 
-import YT from './YT'
+import YT from "./YT";
 
-ReactDOM.render(<YT />, document.getElementById('root'))
+ReactDOM.render(<YT />, document.getElementById("root"));

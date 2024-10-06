@@ -132,5 +132,8 @@
   overflow: hidden;
 }
 .yt-details:hover {
-  background-color: #fffff4;
+  background-color: #000;
+}
+.fea-bullet:hover {
+  background-color: #ff0000;
 }

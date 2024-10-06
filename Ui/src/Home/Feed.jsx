@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Nav from "../Nav/Nav";
 import Button from "../Button/Button";
 import DownloadModal from "../app/Modal/Download";
@@ -6,23 +6,64 @@ import YTMockup from "../Custom/sitesrc/YouTube_redesign-removebg-preview.png";
 import { useToast } from "@chakra-ui/react";
 
 const Feed = () => {
+  const Api_uri = process.env.REACT_APP_API_URL;
+  const [isDownloadContent, setIsDownloadContent] = useState(null);
   const toast = useToast();
-  const showToast = () => {
+
+  const showToast = (message, status) => {
+    console.log(message);
     toast({
-      title: "Toast clicked.",
-      description: "We've created your account for you.",
-      status: "info",
-      duration: 4000,
-      position: "top",
+      title: message,
+      status: status,
+      duration: 2000,
+      position: "right-top",
       isClosable: true,
     });
   };
 
+  useEffect(async () => {
+    try {
+      const response = await fetch(`${Api_uri}`, {
+        method: "GET",
+      });
+      const confirm = await response.json();
+      showToast(confirm.message, "success");
+    } catch (error) {
+      const err = "connection unstable";
+      showToast(err, "error");
+    }
+  }, []);
+
   const [ytLinkVal, setYtLinkVal] = useState("");
   const ytLink = useRef(null);
-  function handleBtnClick() {
-    console.log(ytLinkVal);
-  }
+
+  const handleBtnClick = async () => {
+    try {
+      const response = await fetch(
+        `${Api_uri}/digicore/ytdlp?keyword=vid&url=${ytLinkVal}`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      let data = await response.json();
+      if (!response.ok) {
+        showToast(data.error, "error");
+      } else {
+        setIsDownloadContent(data);
+      }
+    } catch (error) {
+      console.error("Error handling button click:", error.message);
+    }
+  };
+
+  const closeModal = () => {
+    document.body.style.overflow = "auto";
+    setIsDownloadContent(null);
+  };
+
   return (
     <div className="external h-[57rem] lg:h-[64rem]">
       <section className="bg-[#2B2D40] bgImg w-full h-[45rem] relative">
@@ -72,7 +113,12 @@ const Feed = () => {
                     className={"text-sm"}
                   />
                 </div>
-                <DownloadModal />
+                {isDownloadContent && (
+                  <DownloadModal
+                    data={isDownloadContent}
+                    onClose={closeModal}
+                  />
+                )}
               </div>
             </div>
             <div className="YT-mockup self-center grid w-full h-full justify-self-center relative">

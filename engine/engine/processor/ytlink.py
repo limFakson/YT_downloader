@@ -66,7 +66,7 @@ class YTVideoCore:
                         "resolution": f"{stream.width} X {stream.height}",
                         "quality": stream.resolution,
                         "filesize": stream.filesize_mb,
-                        "file extension": stream.subtype,
+                        "file_ext": stream.subtype,
                         "mime_type": stream.mime_type,
                         "thumbnail": self.thumbnail,
                         "url": stream.url,
@@ -75,7 +75,7 @@ class YTVideoCore:
 
             return stream_list
         except VideoUnavailable:
-            err_msg = {"error": "Video unavailable or not found"}
+            err_msg = {"error": "Video unavailable or not found, try again"}
             return err_msg
         except URLError:
             err_msg = {"error": "Network error try again"}
@@ -96,7 +96,7 @@ class YTVideoCore:
                 "resolution": f"{streams.width} X {streams.height}",
                 "quality": streams.resolution,
                 "filesize": streams.filesize_mb,
-                "file extension": streams.subtype,
+                "file_ext": streams.subtype,
                 "mime_type": streams.mime_type,
                 "thumbnail": self.thumbnail,
                 "url": streams.url,
@@ -104,7 +104,7 @@ class YTVideoCore:
 
             return stream_list
         except VideoUnavailable:
-            err_msg = {"error": "Video unavailable or not found"}
+            err_msg = {"error": "Video unavailable or not found, try again"}
             return err_msg
         except URLError:
             err_msg = {"error": "Network error try again"}
@@ -125,7 +125,7 @@ class YTVideoCore:
                 "resolution": f"{streams.width} X {streams.height}",
                 "quality": streams.resolution,
                 "filesize": streams.filesize_mb,
-                "file extension": streams.subtype,
+                "file_ext": streams.subtype,
                 "mime_type": streams.mime_type,
                 "thumbnail": self.thumbnail,
                 "url": streams.url,
@@ -133,7 +133,7 @@ class YTVideoCore:
 
             return stream_list
         except VideoUnavailable:
-            err_msg = {"error": "Video unavailable or not found"}
+            err_msg = {"error": "Video unavailable or not found, try again"}
             return err_msg
         except URLError:
             err_msg = {"error": "Network error try again"}
@@ -161,7 +161,7 @@ class YTVideoCore:
                         "quality": stream.resolution,
                         "filesize": stream.filesize_mb,
                         "mime_type": stream.mime_type,
-                        "file extension": stream.subtype,
+                        "file_ext": stream.subtype,
                         "thumbnail": self.thumbnail,
                         "url": stream.url,
                     }
@@ -169,7 +169,7 @@ class YTVideoCore:
 
             return stream_list
         except VideoUnavailable:
-            err_msg = {"error": "Video unavailable or not found"}
+            err_msg = {"error": "Video unavailable or not found, try again"}
             return err_msg
         except URLError:
             err_msg = {"error": "Network error try again"}
@@ -195,7 +195,7 @@ class YTVideoCore:
                         "resolution": f"{stream.width} X {stream.height}",
                         "quality": stream.resolution,
                         "filesize": stream.filesize_mb,
-                        "file extension": stream.subtype,
+                        "file_ext": stream.subtype,
                         "mime_type": stream.mime_type,
                         "thmbnail": self.thumbnail,
                         "url": stream.url,
@@ -204,7 +204,7 @@ class YTVideoCore:
 
             return stream_list
         except VideoUnavailable:
-            err_msg = {"error": "Video unavailable or not found"}
+            err_msg = {"error": "Video unavailable or not found, try again"}
             return err_msg
         except URLError:
             err_msg = {"error": "Network error try again"}
