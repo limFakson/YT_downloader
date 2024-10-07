@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import React from "react";
 import YoutubeThumbnail from "../../Custom/sitesrc/youtube_thumbenail_demo.jpeg";
 
-const Download = ({ data, onClose }) => {
+const Download = ({ data, type, onClose }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalContent, setModalContent] = useState("");
   const heightRef = useRef(null);
@@ -58,8 +58,7 @@ const Download = ({ data, onClose }) => {
   const handleDownload = (e) => {
     const link = e.target.getAttribute("data-url");
 
-    // Open the link in a new window
-    window.open(link, "_blank");
+    window.open(link, "_blank").focus();
 
     onClose();
   };
@@ -71,12 +70,15 @@ const Download = ({ data, onClose }) => {
           className="relative grid modal-details bg-[#2b2d40] h-auto w-[75%] max-sm:w-[80%] rounded-lg p-4"
           ref={heightRef}
         >
-          <span
-            className="text-right pr-2 cursor-pointer"
-            onClick={closeDownloadModal}
-          >
-            <i className="fa-regular fa-circle-xmark text-xl text-red-500"></i>
-          </span>
+          <div className="flex justify-between items-center">
+            <span className="text-[#f4f4f4] text-lg">{type}</span>
+            <span
+              className="text-right pr-2 cursor-pointer"
+              onClick={closeDownloadModal}
+            >
+              <i className="fa-regular fa-circle-xmark text-xl text-red-500"></i>
+            </span>
+          </div>
           {isModalOpen ? (
             <div className="mt-4 overflow-y-scroll">
               {modalContent.map((ytContent) => (

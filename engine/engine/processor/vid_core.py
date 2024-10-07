@@ -2,6 +2,7 @@ from pytubefix.exceptions import RegexMatchError, VideoUnavailable
 from urllib.error import URLError
 from urllib.request import urlopen
 from pytubefix import YouTube
+import requests
 import json
 import re
 
@@ -155,7 +156,9 @@ class YTVideoCore:
                 return None
 
             for stream in streams:
-                download_link = stream.url
+                # download_link = stream.url
+                # r = requests.get(download_link, allow_redirects=True)
+                # open(stream.default_filename, "wb").write(r.content)
                 stream_list.append(
                     {
                         "filename": stream.default_filename,

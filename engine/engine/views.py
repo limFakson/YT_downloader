@@ -4,7 +4,7 @@ from pytubefix.exceptions import RegexMatchError
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from django.http import JsonResponse
-from .processor.ytlink import YTVideoCore
+from .processor.vid_core import YTVideoCore
 from .processor.func import process
 
 

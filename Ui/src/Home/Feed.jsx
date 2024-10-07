@@ -193,6 +193,7 @@ const Feed = () => {
                 {isDownloadContent && (
                   <DownloadModal
                     data={isDownloadContent}
+                    type={typeClick}
                     onClose={closeModal}
                   />
                 )}

@@ -1,5 +1,5 @@
 import json
-from .ytlink import YTVideoCore
+from .vid_core import YTVideoCore
 
 
 def process(
