@@ -13,7 +13,7 @@ def process(
     audio: bool = False,
 ):
 
-    if keyword == "vid":
+    if keyword == "video":
         core = YTVideoCore(
             url=url,
             all_in=all_in,

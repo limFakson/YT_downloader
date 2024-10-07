@@ -15,7 +15,6 @@ def test_view(request):
 
 @api_view(["GET"])
 def yt_link(request):
-    print(request.query_params["keyword"])
     keyword = request.query_params["keyword"]
     url = request.query_params["url"]
 
@@ -31,6 +30,9 @@ def yt_link(request):
         pros = False
     else:
         pros = True
+
+    if url is None or keyword is None:
+        return Response({"error": "input can't be empty"})
 
     core = process(
         keyword,

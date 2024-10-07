@@ -86,7 +86,7 @@ class YTVideoCore:
 
     def highest_quality(self, yt) -> dict[str:str]:
         try:
-            streams = yt.streams.get_highest_resolution(progressive=self.pros)
+            streams = yt.streams.get_highest_resolution()
 
             if streams is None:
                 return None
@@ -145,7 +145,9 @@ class YTVideoCore:
     def yt_vid(self, yt) -> dict[str:str]:
         try:
             streams = yt.streams.filter(
-                res=self.quality, file_extension=self.file_type, only_video=True
+                res=self.quality,
+                file_extension=self.file_type,
+                progressive=self.pros,
             )
             stream_list = []
 

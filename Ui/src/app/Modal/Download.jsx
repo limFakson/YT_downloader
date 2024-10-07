@@ -7,11 +7,11 @@ const Download = ({ data, onClose }) => {
   const [modalContent, setModalContent] = useState("");
   const heightRef = useRef(null);
 
-  const restrictHeight = () => {
-    if (heightRef.current) {
+  useEffect(() => {
+    const maxHeight = window.innerHeight * 0.87;
+
+    const restrictHeight = () => {
       if (heightRef.current) {
-        const maxHeight = window.innerHeight * 0.87;
-        console.log(maxHeight, window.innerHeight);
         if (heightRef.current.clientHeight > maxHeight) {
           heightRef.current.style.height = `${maxHeight}px`;
           heightRef.current.style.overflowY = "auto";
@@ -20,8 +20,20 @@ const Download = ({ data, onClose }) => {
           heightRef.current.style.overflowY = "auto";
         }
       }
+    };
+
+    const resizeObserver = new ResizeObserver(restrictHeight);
+
+    if (heightRef.current) {
+      resizeObserver.observe(heightRef.current);
     }
-  };
+
+    return () => {
+      if (heightRef.current) {
+        resizeObserver.unobserve(heightRef.current);
+      }
+    };
+  }, [isModalOpen]);
 
   useEffect(() => {
     if (data) {
@@ -43,23 +55,20 @@ const Download = ({ data, onClose }) => {
     document.body.style.overflow = isModalOpen ? "hidden" : "auto";
   }, [isModalOpen]);
 
-  useEffect(() => {
-    if (isModalOpen) {
-      restrictHeight();
-    }
+  const handleDownload = (e) => {
+    const link = e.target.getAttribute("data-url");
 
-    window.addEventListener("resize", restrictHeight);
+    // Open the link in a new window
+    window.open(link, "_blank");
 
-    return () => {
-      window.removeEventListener("resize", restrictHeight);
-    };
-  }, [isModalOpen]);
+    onClose();
+  };
 
   return (
     <div className="dwn-modal fixed left-0 top-0 w-full h-full z-50 overflow-hidden">
       <div className="relative w-full pt-8 h-screen flex justify-center items-center bg-[#ffffff30]">
         <div
-          className="relative grid modal-details bg-[#2b2d40] h-[700px] w-[75%] max-sm:w-[80%] rounded-lg p-4"
+          className="relative grid modal-details bg-[#2b2d40] h-auto w-[75%] max-sm:w-[80%] rounded-lg p-4"
           ref={heightRef}
         >
           <span
@@ -94,11 +103,13 @@ const Download = ({ data, onClose }) => {
                         {ytContent.filesize + " " + "Mb"}
                       </span>
                     </div>
-                    <a href={ytContent.url}>
-                      <button className="w-24 h-10 max-sm:h-12 max-sm:w-full max-md:w-[8rem] max-sm:mt-4 dwn-btn bg-[#FF0000] rounded-md">
-                        <i class="fa-solid fa-download"></i>
-                      </button>
-                    </a>
+                    <button
+                      onClick={handleDownload}
+                      data-url={ytContent.url}
+                      className="w-24 h-10 max-sm:h-12 max-sm:w-full max-md:w-[8rem] max-sm:mt-4 dwn-btn bg-[#FF0000] rounded-md"
+                    >
+                      <i class="fa-solid fa-download"></i>
+                    </button>
                   </div>
                 </div>
               ))}
