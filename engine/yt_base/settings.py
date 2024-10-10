@@ -25,7 +25,7 @@ SECRET_KEY = "django-insecure-&plxvd^k!erz=c6pii=0@g6h)ues7g$ix+&9$dj%3879c^a)eu
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["https://yt-downloader-zbqj.onrender.com", "*"]
 
 
 # Application definition
