@@ -86,6 +86,12 @@ const Feed = () => {
     setShow(false);
   };
 
+  useEffect(() => {
+    if (typeClick != "video") {
+      showToast("Feature not available", "error");
+    }
+  }, [typeClick]);
+
   return (
     <div className="external h-[57rem] lg:h-[64rem]">
       <section className="bg-[#2B2D40] bgImg w-full h-[45rem] relative">
@@ -158,19 +164,19 @@ const Feed = () => {
                         className="text-[#f4f4f4] text-sm cursor-pointer px-3 py-1 hover:bg-black"
                         onClick={handleDropClick}
                       >
-                        Video
+                        video
                       </li>
                       <li
                         className="text-[#f4f4f4] text-sm cursor-pointer px-3 py-1 hover:bg-black"
                         onClick={handleDropClick}
                       >
-                        Playlist
+                        playlist
                       </li>
                       <li
                         className="text-[#f4f4f4] text-sm cursor-pointer px-3 py-1 hover:bg-black"
                         onClick={handleDropClick}
                       >
-                        Shorts
+                        shorts
                       </li>
                     </ul>
                   </div>

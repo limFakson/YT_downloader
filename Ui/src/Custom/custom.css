@@ -137,3 +137,9 @@
 .fea-bullet:hover {
   background-color: #ff0000;
 }
+.bottom-footer div span strong,
+.bottom-footer div ul li {
+  color: #f4f4f4;
+  font-size: 20px;
+  padding: 3px;
+}
